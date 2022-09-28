@@ -45,13 +45,14 @@ void exibirMenu(){
 
 int main(void)
 {
-	int qtdCarros = 5;
+	int qtdCarros = 1;
 	 /* Cria array de carros */
     veiculo *veiculos = calloc( qtdCarros, sizeof(veiculo) );
     
     int sair = 0;
     int resposta;
     int qtdCarrosInseridos = 0;
+    int adicionarMais = 0;
     
     while(sair == 0){
     	exibirMenu();
@@ -62,36 +63,34 @@ int main(void)
 	    	break;
 		}
 	    if(resposta == 1){
-	    	if(qtdCarrosInseridos == qtdCarros){
+	    	if(qtdCarrosInseridos >= qtdCarros){
 	    		
-	    		int adicionarMais = 0;
 	    		printf("Voce atingiu o numero maximo de alocacao, quantos carros mais voce deseja adicionar?");
-	    		scanf("%d", adicionarMais);
-	    		
-	    		veiculo *veiculos = realloc(adicionarMais, sizeof(veiculo));
+	    		scanf("%d", &adicionarMais);
+	    		//veiculos = realloc(adicionarMais, sizeof(veiculo));
 	    		qtdCarros = adicionarMais + qtdCarros;
-	    		
 			}
-			qtdCarrosInseridos++;
-			printf("Voce esta adicionando o veiculo na casa [%d]", qtdCarrosInseridos);
-			
-	    	printf("Digite a placa:");
-	    	scanf("%s", veiculos[qtdCarrosInseridos].placa);
-	    	printf("Digite o ano de fabricacao:");
-	    	scanf("%d", &veiculos[qtdCarrosInseridos].anoFabricado);
-	    	printf("Digite a marca:");
-	    	scanf("%s", veiculos[qtdCarrosInseridos].marca);
-	    	printf("Digite o modelo:");
-	    	scanf("%s", veiculos[qtdCarrosInseridos].modelo);
-	    	printf("Digite a cor:");
-	    	scanf("%s", veiculos[qtdCarrosInseridos].cor);
-	    	printf("Digite o preco de venda:");
-	    	scanf("%d", &veiculos[qtdCarrosInseridos].valorVenda);
-	    	
-	    	
-	    	
-	    	printf("Veiculo inserido com sucesso!\n");
-	    	printf("----------------------------------");
+				qtdCarrosInseridos++;
+				printf("\nVoce esta adicionando o veiculo na casa [%d]\n", qtdCarrosInseridos);
+				
+		    	printf("Digite a placa:");
+		    	scanf("%s", veiculos[qtdCarrosInseridos].placa);
+		    	printf("Digite o ano de fabricacao:");
+		    	scanf("%d", &veiculos[qtdCarrosInseridos].anoFabricado);
+		    	printf("Digite a marca:");
+		    	scanf("%s", veiculos[qtdCarrosInseridos].marca);
+		    	printf("Digite o modelo:");
+		    	scanf("%s", veiculos[qtdCarrosInseridos].modelo);
+		    	printf("Digite a cor:");
+		    	scanf("%s", veiculos[qtdCarrosInseridos].cor);
+		    	printf("Digite o preco de venda:");
+		    	scanf("%d", &veiculos[qtdCarrosInseridos].valorVenda);
+		    	
+		    	
+		    	
+		    	printf("Veiculo inserido com sucesso!\n");
+		    	printf("----------------------------------\n");
+		    
 		}
 		
 		if(resposta == 2){
@@ -105,6 +104,26 @@ int main(void)
 			char buscarPlaca[MAX];
 			printf("Digite a placa: ");
 			scanf("%s", buscarPlaca);
+			int i;
+			for(i=0; i<=qtdCarrosInseridos; i++){
+				if(veiculos[i].placa == buscarPlaca){
+					printf("Encontrei! Segue os dados: ");
+					printf("[%d] - PLACA: %s - ANO FAB: %d - MARCA: %s - MODELO: %s - COR: %s - PRECO DE VENDA: %d\n", i, veiculos[i].placa, veiculos[i].anoFabricado, veiculos[i].marca, veiculos[i].modelo, veiculos[i].cor, veiculos[i].valorVenda);
+				}
+			}
+		}
+		
+			if(resposta == 4){
+			int anoFabricado;
+			printf("Digite o ano de fabricacao: ");
+			scanf("%d", &anoFabricado);
+			int i;
+			for(i=0; i<=qtdCarrosInseridos; i++){
+				printf("-----------LISTA DE DADOS-----------\n");
+				if(veiculos[i].anoFabricado == anoFabricado){
+					printf("[%d] - PLACA: %s - ANO FAB: %d - MARCA: %s - MODELO: %s - COR: %s - PRECO DE VENDA: %d\n", i, veiculos[i].placa, veiculos[i].anoFabricado, veiculos[i].marca, veiculos[i].modelo, veiculos[i].cor, veiculos[i].valorVenda);
+				}
+			}
 		}
 	}
 	
